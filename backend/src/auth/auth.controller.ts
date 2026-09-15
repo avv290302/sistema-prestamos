@@ -10,10 +10,13 @@ import {
   Post,
   Req,
   Res,
+  UnauthorizedException,
 } from "@nestjs/common";
 import type { CookieOptions, Request, Response } from "express";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dto/login.dto";
+import { Public } from "./auth.decorators";
+import type { AuthenticatedRequest } from "./auth.guard";
 
 @Controller("auth")
 export class AuthController {
@@ -45,6 +48,7 @@ export class AuthController {
     return cookies?.["prestamos_session"];
   }
 
+  @Public()
   @Post("login")
   @HttpCode(HttpStatus.OK)
   @Header("Cache-Control", "no-store")
@@ -70,13 +74,15 @@ export class AuthController {
 
   @Get("me")
   @Header("Cache-Control", "no-store")
-  async me(@Req() request: Request) {
-    const token = this.readSessionToken(request);
-    const user = await this.authService.getSessionUser(token);
+  me(@Req() request: AuthenticatedRequest) {
+    if (!request.authUser) {
+      throw new UnauthorizedException("Sesión inválida o vencida.");
+    }
 
-    return { user };
+    return { user: request.authUser };
   }
 
+  @Public()
   @Post("logout")
   @HttpCode(HttpStatus.NO_CONTENT)
   @Header("Cache-Control", "no-store")

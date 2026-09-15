@@ -23,10 +23,13 @@ model User {
   isActive     Boolean  @default(true) @map("is_active")
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
-    sessions Session[]
+
+  sessions       Session[]
+  clientsCreated Client[] @relation("ClientCreatedBy")
 
   @@map("users")
 }
+
 model Session {
   id        String    @id @default(uuid()) @db.Uuid
   tokenHash String    @unique @map("token_hash") @db.VarChar(64)
@@ -40,4 +43,25 @@ model Session {
   @@index([userId])
   @@index([expiresAt])
   @@map("sessions")
+}
+
+model Client {
+  id             String   @id @default(uuid()) @db.Uuid
+  fullName       String   @map("full_name") @db.VarChar(150)
+  phone          String   @db.VarChar(30)
+  address        String   @db.VarChar(500)
+  notes          String?  @db.Text
+  referenceName  String?  @map("reference_name") @db.VarChar(150)
+  referencePhone String?  @map("reference_phone") @db.VarChar(30)
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String   @map("created_by_id") @db.Uuid
+
+    createdBy User @relation("ClientCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@index([fullName])
+  @@index([phone])
+  @@index([createdById])
+  @@map("clients")
 }

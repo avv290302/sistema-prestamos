@@ -18,3 +18,12 @@ coverage/
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Cliente de Prisma generado automáticamente
+backend/src/generated/
+
+# Instrucciones de asistentes instaladas por Prisma
+backend/.agents/
+backend/.claude/
+backend/.windsurf/
+backend/skills-lock.json

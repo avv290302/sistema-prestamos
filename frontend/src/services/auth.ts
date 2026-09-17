@@ -30,7 +30,7 @@ export class ApiError extends Error {
   }
 }
 
-async function request(
+export async function request(
   path: string,
   options: RequestInit = {},
 ): Promise<Response> {
@@ -42,7 +42,8 @@ async function request(
       credentials: "include",
       cache: "no-store",
     });
-  } catch {
+  } catch (error) {
+    if (options.signal?.aborted) throw error;
     throw new ApiError(
       "No pudimos conectar con el servidor. Revisa tu conexión e intenta nuevamente.",
       0,
@@ -60,13 +61,22 @@ async function request(
     } else if (response.status === 429) {
       message = "Demasiados intentos. Intenta nuevamente en 15 minutos.";
     } else if (response.status === 400) {
-      message = "Revisa el correo y la contraseña que escribiste.";
+      message = "Revisa los datos ingresados e intenta nuevamente.";
     } else if (response.status === 403) {
-      message = "La solicitud no está permitida desde esta página.";
+      message = "No tienes permiso para realizar esta operación desde esta página.";
+    } else if (response.status === 413) {
+      message = "El archivo supera el máximo permitido de 5 MB.";
     } else if (response.status >= 500) {
       message = "El servidor no pudo completar la solicitud. Intenta más tarde.";
     }
 
+    if ((path.startsWith("/payments") || path.startsWith("/reports") || path.startsWith("/loans") || path.startsWith("/users") || path.startsWith("/clients") || path.startsWith("/settings")) && [400, 404, 409].includes(response.status)) {
+      try {
+        const details = await response.json() as { message?: unknown };
+        if (typeof details.message === "string") message = details.message;
+        else if (Array.isArray(details.message) && details.message.every(item => typeof item === "string")) message = details.message.join(" ");
+      } catch { /* Keep the fallback if the response is not JSON. */ }
+    }
     throw new ApiError(message, response.status);
   }
 

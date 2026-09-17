@@ -1,0 +1,14 @@
+BEGIN;
+ALTER TABLE users ADD COLUMN version INTEGER NOT NULL DEFAULT 1;
+CREATE TABLE app_settings (
+  id INTEGER PRIMARY KEY DEFAULT 1 CHECK (id=1),
+  business_name VARCHAR(100) NOT NULL DEFAULT 'Préstamos',
+  interest_bps INTEGER NOT NULL DEFAULT 4000 CHECK (interest_bps BETWEEN 0 AND 100000),
+  installment_count INTEGER NOT NULL DEFAULT 14 CHECK (installment_count BETWEEN 1 AND 1000),
+  frequency VARCHAR(15) NOT NULL DEFAULT 'WEEKLY' CHECK (frequency IN ('DAILY','WEEKLY','FORTNIGHTLY','MONTHLY','INTERVAL')),
+  interval_days INTEGER NOT NULL DEFAULT 7 CHECK (interval_days BETWEEN 1 AND 365),
+  first_payment_after_days INTEGER NOT NULL DEFAULT 7 CHECK (first_payment_after_days BETWEEN 0 AND 365),
+  version INTEGER NOT NULL DEFAULT 1
+);
+INSERT INTO app_settings (id) VALUES (1);
+COMMIT;

@@ -1,0 +1,16 @@
+.collection-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 24px 0; }
+.collection-card { display: flex; flex-direction: column; gap: 12px; text-align: left; padding: 20px; background: white; border: 1px solid #dce5e8; border-radius: 14px; color: #172b3a; }
+.collection-card:hover { border-color: #246a59; }
+.collection-card strong { font-size: 24px; }
+.collection-card span, .collection-card small { color: #52676c; }
+.collection-card.overdue { background: #fff4f1; border-color: #efc9c5; }
+.collection-card.overdue strong { color: #9d2822; }
+.collection-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+.collection-filters [aria-pressed="true"] { color: white; background: #15594c; border-color: #15594c; }
+.collection-date { color: #5f6e7b; font-size: 13px; line-height: 1.7; }
+.collection-contact { display: block; margin: 7px 0; }
+.collection-address { display: block; min-width: 150px; max-width: 240px; color: #5f6e7b; font-size: 12px; line-height: 1.5; }
+.collection-loan-id { display: block; margin-top: 8px; font-size: 10px; color: #5f6e7b; min-width: 110px; overflow-wrap: anywhere; }
+.collection-status { display: block; width: max-content; padding: 5px 8px; margin-top: 8px; border-radius: 6px; background: #e4f2ed; color: #205b4d; font-size: 11px; }
+.collection-status.late { background: #fff0ed; color: #9d2822; }
+.collections-page .client-table th { white-space: nowrap; }

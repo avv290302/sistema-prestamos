@@ -1,0 +1,32 @@
+.clients-page { max-width: 1100px; margin: 32px auto; padding: 0 24px 40px; }
+.clients-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.clients-heading h2 { margin: 8px 0; font-size: 32px; }
+.clients-heading p, .client-panel > p { color: #5f6e7b; }
+.clients-page .primary-button { width: auto; }
+.client-panel { margin: 24px 0; padding: 24px; border: 1px solid #e2e8ed; border-radius: 16px; background: white; }
+.client-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.client-form-grid textarea { width: 100%; min-height: 100px; padding: 12px 14px; border: 1px solid #bdcbd4; border-radius: 10px; font: inherit; resize: vertical; }
+.client-search { display: flex; align-items: end; gap: 12px; margin: 28px 0; }
+.client-search .form-field { flex: 1; margin: 0; }
+.client-search button { min-height: 50px; }
+.client-table-wrap { overflow-x: auto; border: 1px solid #e2e8ed; border-radius: 14px; background: white; }
+.client-table { width: 100%; border-collapse: collapse; text-align: left; }
+.client-table th, .client-table td { padding: 16px; border-bottom: 1px solid #e2e8ed; overflow-wrap: anywhere; }
+.client-table th { background: #edf3f5; font-size: 13px; }
+.client-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; }
+.client-notice { padding: 16px; background: #e4f2ed; color: #205b4d; border-radius: 10px; }
+.client-panel dl { display: grid; gap: 16px; }
+.client-panel dt { font-weight: 650; }
+.client-panel dd { margin: 6px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.workspace .welcome-card { max-width: 1052px; margin: 24px auto; padding: 24px; }
+@media (max-width: 650px) {
+  .client-form-grid { grid-template-columns: 1fr; }
+  .client-pagination { flex-wrap: wrap; }
+  .workspace .welcome-card { margin: 24px; }
+  .client-table th, .client-table td { padding: 10px; }
+}
+.client-risk {display:inline-block;font-size:12px;font-weight:700;border-radius:20px;padding:7px 10px;white-space:nowrap;}
+.client-risk.green{color:#166534;background:#dcfce7}.client-risk.yellow{color:#854d0e;background:#fef9c3}.client-risk.red{color:#991b1b;background:#fee2e2}.client-risk.gray{color:#475569;background:#e2e8f0}
+.client-risk-guide{margin:20px 0;padding:16px;background:#edf4f2;border-radius:12px;line-height:1.6}.client-risk-guide summary{cursor:pointer;font-weight:600}
+.client-files{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;padding:16px 0}.client-photo{width:140px;height:160px;object-fit:cover;border-radius:12px}.client-file-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}.client-file-row span{overflow-wrap:anywhere;max-width:340px}
+.clients-page select{font:inherit;border:1px solid #c6d5d0;border-radius:8px;padding:12px;background:white;color:#173e35;min-height:44px}.clients-page .client-search{flex-wrap:wrap}.clients-page small{line-height:1.5;color:#52676c}

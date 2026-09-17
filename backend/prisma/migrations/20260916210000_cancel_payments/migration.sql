@@ -1,0 +1,2 @@
+ALTER TABLE payments ADD COLUMN cancelled_at TIMESTAMPTZ(3), ADD COLUMN cancelled_by_id UUID REFERENCES users(id) ON DELETE RESTRICT, ADD COLUMN cancelled_by_name VARCHAR(150), ADD COLUMN cancellation_reason VARCHAR(500);
+ALTER TABLE payments ADD CONSTRAINT payments_cancellation_complete CHECK ((cancelled_at IS NULL AND cancelled_by_id IS NULL AND cancelled_by_name IS NULL AND cancellation_reason IS NULL) OR (cancelled_at IS NOT NULL AND cancelled_by_id IS NOT NULL AND cancelled_by_name IS NOT NULL AND cancellation_reason IS NOT NULL));

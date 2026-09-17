@@ -1,135 +1,218 @@
 .login-layout {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1.08fr 1fr;
   min-height: 100vh;
   min-height: 100dvh;
 }
 
+/* =========================
+   PANEL DE MARCA
+========================= */
+
 .brand-panel {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 64px;
-  padding: clamp(32px, 5vw, 80px);
+  padding: clamp(34px, 5vw, 82px);
   color: #fff;
   background:
-    radial-gradient(ellipse at 0% 100%, #17675d 0%, transparent 65%),
-    #102c3b;
+    radial-gradient(circle at 15% 18%, rgba(42, 192, 223, 0.18) 0%, transparent 24%),
+    radial-gradient(circle at 18% 88%, rgba(230, 188, 73, 0.18) 0%, transparent 28%),
+    radial-gradient(circle at 90% 8%, rgba(28, 123, 110, 0.14) 0%, transparent 25%),
+    linear-gradient(145deg, #081a26 0%, #0d2d3e 42%, #103b44 72%, #0a2430 100%);
+}
+
+.brand-panel::before {
+  content: "";
+  position: absolute;
+  inset: auto -120px -160px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.12) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.brand-panel::after {
+  content: "";
+  position: absolute;
+  inset: 60px auto auto -120px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(228, 183, 60, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.brand,
+.brand-copy,
+.brand-footer {
+  position: relative;
+  z-index: 1;
 }
 
 .brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  font-size: 17px;
-  font-weight: 650;
+  gap: 22px;
+  width: fit-content;
+  padding: 18px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.brand-icon {
-  display: inline-flex;
+.brand-logo {
+  display: block;
+  width: 138px;
+  height: 100px;
   flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 13px;
-  background: #dcefe9;
-  color: #145649;
-  font-size: 25px;
+  object-fit: contain;
+  border-radius: 16px;
+
+  /* Esto ayuda bastante a “desaparecer” el fondo negro del logo */
+  mix-blend-mode: screen;
+
+  filter:
+    drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45))
+    saturate(1.15)
+    contrast(1.08);
+}
+
+.brand-name {
+  font-size: clamp(28px, 3vw, 40px);
   font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  background: linear-gradient(
+    180deg,
+    #fff4bf 0%,
+    #f6d76b 35%,
+    #d7a52d 70%,
+    #fff1b0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px rgba(222, 181, 57, 0.12);
 }
 
 .eyebrow {
   display: block;
   font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.16em;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   line-height: 1.6;
 }
 
 .brand-copy {
-  max-width: 540px;
+  max-width: 560px;
 }
 
 .brand-copy .eyebrow {
-  color: #a5d9cb;
+  color: #f0cb6b;
 }
 
 .brand-copy h1 {
-  margin: 20px 0;
-  font-size: clamp(36px, 4.1vw, 60px);
-  font-weight: 650;
-  letter-spacing: -0.045em;
-  line-height: 1.12;
+  margin: 24px 0 18px;
+  font-size: clamp(40px, 4.6vw, 68px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.03;
+  color: #f8fcff;
+  text-wrap: balance;
 }
 
 .brand-copy p {
-  max-width: 420px;
-  color: #c4d8df;
-  font-size: 17px;
+  max-width: 470px;
+  color: #d2e3ea;
+  font-size: 18px;
   line-height: 1.8;
 }
 
 .feature-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 30px;
+  gap: 12px;
+  margin-top: 32px;
 }
 
 .feature-list span {
-  padding: 9px 13px;
-  border: 1px solid #53777b;
+  padding: 10px 16px;
+  border: 1px solid rgba(243, 204, 101, 0.24);
   border-radius: 999px;
-  color: #e3f1ee;
-  font-size: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f7fbfc;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .brand-footer {
   margin: 0;
-  color: #b9d0d5;
-  font-size: 13px;
+  color: #bad0d8;
+  font-size: 14px;
 }
+
+/* =========================
+   PANEL DEL LOGIN
+========================= */
 
 .form-panel {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 42px;
   padding: 64px 40px;
+  background:
+    radial-gradient(circle at top right, rgba(53, 150, 176, 0.07) 0%, transparent 22%),
+    linear-gradient(180deg, #f2f5f8 0%, #edf1f5 100%);
 }
 
 .login-card {
   width: 100%;
-  max-width: 440px;
-  padding: 40px;
-  border: 1px solid #e2e8ed;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 20px 60px #1837480a;
+  max-width: 460px;
+  padding: 42px;
+  border: 1px solid #dde6ec;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 24px 60px rgba(14, 34, 48, 0.08),
+    0 8px 20px rgba(14, 34, 48, 0.04);
 }
 
 .login-card .eyebrow {
-  color: #37695f;
+  color: #1c6d70;
 }
 
 .login-card h2 {
-  margin: 12px 0;
-  font-size: 34px;
-  letter-spacing: -0.04em;
+  margin: 12px 0 12px;
+  font-size: 38px;
+  letter-spacing: -0.05em;
+  color: #102c3b;
 }
 
 .form-intro,
 .access-help,
 .form-footer {
   color: #5f6e7b;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .form-intro {
   margin: 0 0 30px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .form-field {
@@ -140,22 +223,34 @@
   display: block;
   margin-bottom: 9px;
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 700;
+  color: #132c3d;
 }
 
 .form-field input {
   width: 100%;
-  min-height: 50px;
-  padding: 12px 14px;
-  border: 1px solid #bdcbd4;
-  border-radius: 10px;
-  background: #fff;
+  min-height: 54px;
+  padding: 12px 15px;
+  border: 1px solid #c5d1d9;
+  border-radius: 12px;
+  background: #ffffff;
   color: #172b3a;
   font-size: 16px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .form-field input::placeholder {
-  color: #6a7884;
+  color: #7a8791;
+}
+
+.form-field input:focus {
+  border-color: #2a9daf;
+  box-shadow: 0 0 0 4px rgba(42, 157, 175, 0.12);
+  background: #fff;
+  outline: none;
 }
 
 .password-field {
@@ -163,36 +258,51 @@
 }
 
 .password-field input {
-  padding-right: 88px;
+  padding-right: 95px;
 }
 
 .password-toggle {
   position: absolute;
-  top: 3px;
-  right: 4px;
-  min-height: 44px;
-  padding: 0 10px;
+  top: 5px;
+  right: 6px;
+  min-height: 42px;
+  padding: 0 12px;
   border: 0;
-  border-radius: 7px;
+  border-radius: 9px;
   background: transparent;
-  color: #285e53;
+  color: #1b6b68;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.password-toggle:hover:not(:disabled) {
+  background: #edf6f4;
+  color: #124f49;
 }
 
 .primary-button {
   width: 100%;
-  min-height: 50px;
+  min-height: 54px;
   padding: 12px 20px;
   border: 0;
-  border-radius: 10px;
-  background: #15594c;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1a7c70 0%, #115349 100%);
   color: #fff;
-  font-weight: 650;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+  box-shadow: 0 14px 26px rgba(17, 83, 73, 0.22);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
 }
 
 .primary-button:hover:not(:disabled) {
-  background: #104638;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 30px rgba(17, 83, 73, 0.28);
+  filter: brightness(1.03);
 }
 
 .access-help {
@@ -208,14 +318,19 @@
 }
 
 .error-message {
+  margin-bottom: 18px;
   padding: 12px 14px;
   border: 1px solid #efc9c5;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #fff3f2;
   color: #9d2822;
   font-size: 14px;
   line-height: 1.6;
 }
+
+/* =========================
+   PANTALLA DE ESTADO
+========================= */
 
 .status-screen {
   display: grid;
@@ -223,22 +338,48 @@
   min-height: 100vh;
   min-height: 100dvh;
   padding: 24px;
+  background: linear-gradient(180deg, #f3f6f9 0%, #edf2f6 100%);
 }
 
 .status-card {
   width: 100%;
-  max-width: 430px;
+  max-width: 450px;
+  padding: 38px 30px;
   text-align: center;
+  border: 1px solid #e1e8ee;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 45px rgba(14, 34, 48, 0.06);
+}
+
+.status-logo {
+  display: block;
+  width: 190px;
+  max-height: 140px;
+  margin: 0 auto 24px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter:
+    drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))
+    saturate(1.12)
+    contrast(1.05);
 }
 
 .status-card h1 {
-  font-size: 26px;
+  margin: 0 0 12px;
+  font-size: 28px;
+  color: #102c3b;
 }
 
 .status-card p {
+  margin: 0;
   color: #5f6e7b;
-  line-height: 1.6;
+  line-height: 1.7;
 }
+
+/* =========================
+   WORKSPACE
+========================= */
 
 .workspace {
   min-height: 100vh;
@@ -321,14 +462,43 @@
   font-size: 14px;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1080px) {
+  .brand-name {
+    font-size: clamp(24px, 2.6vw, 34px);
+  }
+
+  .brand-logo {
+    width: 122px;
+    height: 90px;
+  }
+}
+
 @media (max-width: 900px) {
   .login-layout {
     grid-template-columns: 1fr;
   }
 
   .brand-panel {
-    gap: 30px;
+    gap: 32px;
     padding: 30px 24px;
+  }
+
+  .brand {
+    gap: 16px;
+    padding: 16px 18px;
+  }
+
+  .brand-logo {
+    width: 100px;
+    height: 74px;
+  }
+
+  .brand-name {
+    font-size: 24px;
   }
 
   .brand-copy {
@@ -336,7 +506,7 @@
   }
 
   .brand-copy h1 {
-    font-size: clamp(32px, 7vw, 46px);
+    font-size: clamp(34px, 7vw, 50px);
   }
 
   .brand-copy p {
@@ -354,18 +524,51 @@
     padding: 32px 20px;
   }
 
+  .login-card {
+    padding: 32px 24px;
+  }
+
   .welcome-card {
     margin: 32px 20px;
     padding: 28px;
   }
 }
 
+@media (max-width: 520px) {
+  .brand {
+    align-items: center;
+  }
+
+  .brand-logo {
+    width: 84px;
+    height: 62px;
+  }
+
+  .brand-name {
+    font-size: 20px;
+  }
+
+  .login-card h2 {
+    font-size: 32px;
+  }
+}
+
 @media (max-width: 400px) {
   .login-card {
-    padding: 28px 22px;
+    padding: 26px 20px;
   }
 
   .brand {
-    font-size: 15px;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .brand-logo {
+    width: 74px;
+    height: 54px;
+  }
+
+  .brand-name {
+    font-size: 17px;
   }
 }

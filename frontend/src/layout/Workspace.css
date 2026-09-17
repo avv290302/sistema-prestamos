@@ -1,0 +1,454 @@
+.app-shell {
+  display: grid;
+  grid-template-columns: 292px minmax(0, 1fr);
+  min-height: 100dvh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.app-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow-y: auto;
+  padding: 26px 18px 22px;
+  background: #102c3b;
+  color: #eaf3f4;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   LOGO / EMPRESA
+========================= */
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 4px 8px 28px;
+  min-width: 0;
+}
+
+.sidebar-brand-logo {
+  display: block;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  object-fit: contain;
+
+  filter:
+    drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28))
+    saturate(1.05);
+}
+
+.sidebar-brand-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.sidebar-brand-name {
+  display: block;
+  margin: 0;
+  color: #f3d36d;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+
+  background: linear-gradient(
+    180deg,
+    #fff2ad 0%,
+    #e9c453 52%,
+    #cda02f 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sidebar-brand-copy > span {
+  display: block;
+  margin-top: 7px;
+  color: #aac6cd;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+}
+
+/* =========================
+   CONTENIDO DEL SIDEBAR
+========================= */
+
+.sidebar-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sidebar-label {
+  margin: 14px 12px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #aac6cd;
+}
+
+.administration-label {
+  margin-top: 30px;
+}
+
+.module-link {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0;
+  padding: 13px 12px;
+  min-height: 48px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: #cadce1;
+  text-align: left;
+  font-size: 13px;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.module-link svg {
+  flex-shrink: 0;
+}
+
+.module-link:hover {
+  background: #203e4c;
+  color: white;
+}
+
+.module-link.active {
+  background: #245b56;
+  border-color: #4b8275;
+  color: white;
+}
+
+.module-soon {
+  margin-left: auto;
+  font-size: 9px;
+  color: #b6cbd1;
+}
+
+/* =========================
+   USUARIO
+========================= */
+
+.sidebar-account {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  padding: 28px 10px 16px;
+}
+
+.account-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #294653;
+  font-weight: 700;
+}
+
+.sidebar-account strong {
+  display: block;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.sidebar-account div > span {
+  display: block;
+  margin-top: 5px;
+  color: #aac6cd;
+  font-size: 11px;
+}
+
+.sidebar-logout {
+  background: transparent;
+  border: 1px solid #53727e;
+  border-radius: 9px;
+  padding: 11px;
+  color: #eaf3f4;
+  font-size: 13px;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.sidebar-logout:hover {
+  background: #203e4c;
+  border-color: #6b8d98;
+}
+
+.sidebar-toggle {
+  display: none;
+}
+
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
+
+.app-main {
+  min-width: 0;
+}
+
+.module-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 26px 36px;
+  border-bottom: 1px solid #e2e8ed;
+  background: white;
+}
+
+.module-header .eyebrow {
+  font-size: 10px;
+  color: #5f6e7b;
+}
+
+.module-header h1 {
+  font-size: 25px;
+  margin: 7px 0 0;
+  letter-spacing: -0.03em;
+}
+
+.module-header h1:focus {
+  outline: none;
+}
+
+/* =========================
+   INICIO
+========================= */
+
+.module-overview {
+  padding: 36px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.module-overview h2 {
+  font-size: 30px;
+  overflow-wrap: anywhere;
+}
+
+.module-overview > p {
+  color: #5f6e7b;
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.module-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  text-align: left;
+  padding: 24px;
+  border: 1px solid #dae4e8;
+  border-radius: 14px;
+  background: white;
+  color: #172b3a;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.module-card:hover {
+  border-color: #438777;
+  background: #f7fcfa;
+  transform: translateY(-1px);
+}
+
+.module-card svg {
+  color: #226453;
+}
+
+.module-card strong {
+  font-size: 17px;
+}
+
+.module-card > span {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #5f6e7b;
+}
+
+.module-card small {
+  margin-top: auto;
+  color: #286553;
+  font-weight: 650;
+}
+
+/* =========================
+   PLACEHOLDERS
+========================= */
+
+.module-placeholder {
+  max-width: 580px;
+  margin: 70px auto;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.placeholder-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  background: #e4f2ed;
+  color: #205b4d;
+  border-radius: 18px;
+}
+
+.placeholder-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.module-placeholder h2 {
+  font-size: 30px;
+}
+
+.module-placeholder p {
+  color: #5f6e7b;
+  line-height: 1.7;
+}
+
+.module-placeholder button {
+  margin-top: 18px;
+}
+
+.shell-error {
+  margin: 24px;
+}
+
+/* =========================
+   ACCESIBILIDAD
+========================= */
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  z-index: 5;
+  padding: 12px;
+  background: white;
+  color: #102c3b;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .app-sidebar {
+    position: static;
+    height: auto;
+    padding: 16px 20px;
+  }
+
+  .sidebar-brand {
+    padding: 0 0 16px;
+    gap: 12px;
+  }
+
+  .sidebar-brand-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .sidebar-brand-name {
+    font-size: 17px;
+  }
+
+  .sidebar-brand-copy > span {
+    margin-top: 4px;
+    font-size: 9px;
+  }
+
+  .sidebar-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid #53727e;
+    border-radius: 8px;
+    color: white;
+    background: transparent;
+    min-height: 44px;
+  }
+
+  .sidebar-body {
+    display: none;
+  }
+
+  .is-open .sidebar-body {
+    display: flex;
+  }
+
+  .sidebar-account {
+    margin-top: 10px;
+  }
+
+  .module-header {
+    padding: 20px 24px;
+    flex-wrap: wrap;
+  }
+
+  .module-overview {
+    padding: 28px 24px;
+  }
+
+  .module-placeholder {
+    margin: 30px auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .sidebar-brand-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .sidebar-brand-name {
+    font-size: 15px;
+  }
+}

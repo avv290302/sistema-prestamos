@@ -1,0 +1,121 @@
+.app-dialog {width:min(940px,calc(100% - 32px));max-width:940px;max-height:calc(100dvh - 32px);padding:0;border:1px solid #90a5ad;border-radius:18px;color:inherit;background:#fff;overflow:auto;overscroll-behavior:contain;}
+.app-dialog::backdrop {background:rgba(4,12,19,.7);}
+.dialog-content {outline:none;min-width:0;}
+.dialog-content > .client-panel {margin:0;border:0;border-radius:0;}
+.app-dialog .clients-heading {align-items:flex-start;}
+.app-dialog .client-panel {overflow-wrap:anywhere;}
+.app-dialog .loan-actions {position:sticky;bottom:0;padding:12px 0;background:#fff;z-index:1;}
+.app-dialog form > .primary-button {position:sticky;bottom:12px;}
+.app-dialog .form-field textarea {width:100%;min-height:110px;padding:12px;border:1px solid #90a5ad;border-radius:10px;font:inherit;resize:vertical;}
+.danger-button {background:#a52e35;color:white;border:1px solid #a52e35;min-height:46px;border-radius:10px;padding:12px 18px;font:inherit;font-weight:650;cursor:pointer;}
+.danger-button:hover:not(:disabled) {background:#86242a;}
+.payment-status {display:inline-block;font-size:13px;font-weight:700;border-radius:20px;padding:6px 12px;}
+.payment-status.valid {background:#e4f2ed;color:#205b4d;}
+.payment-status.cancelled {background:#ffe5e4;color:#992833;}
+.cancel-payment-section {border-top:1px solid #bdcbd4;padding-top:18px;margin-top:24px;}
+.receipt-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;}
+.receipt-card {background:white;border:1px solid #d5e0e5;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0;}
+.receipt-card h3,.receipt-card p {margin:0;overflow-wrap:anywhere;}
+.receipt-card .clients-heading {font-size:13px;gap:10px;}
+.receipt-card button {margin-top:auto;}
+.receipt-amount {display:block;font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;}
+.receipt-folio {display:block;overflow-wrap:anywhere;line-height:1.6;}
+.form-field,fieldset {min-width:0;}
+input,textarea,select {max-width:100%;}
+.client-table-wrap {max-width:100%;}
+@media screen {
+[data-theme="dark"] .app-dialog,[data-theme="dark"] .app-dialog .loan-actions,[data-theme="dark"] .receipt-card {background:#151a20;color:#e6edf2;border-color:#536672;}
+[data-theme="dark"] .payment-status.valid {background:#173a31;color:#a2e8cb;}
+[data-theme="dark"] .payment-status.cancelled {background:#4c242b;color:#ffb4ae;}
+[data-theme="dark"] .app-dialog input,[data-theme="dark"] .app-dialog textarea,[data-theme="dark"] .app-dialog select {background:#0f141a;color:#edf4f8;border-color:#61717f;}
+}
+@media screen and (max-width:800px) {
+  .app-sidebar {position:sticky;top:0;z-index:4;max-height:85dvh;overflow:auto;padding:10px 16px;}
+  .sidebar-brand {padding-bottom:8px;gap:10px;}
+  .sidebar-brand-logo {width:42px;height:42px;}
+  .sidebar-brand-name {font-size:16px;}
+  .sidebar-brand-copy > span {font-size:9px;}
+  .sidebar-toggle {min-height:44px;}
+  .module-header {padding:18px 16px;}
+  .module-header h1 {font-size:23px;}
+  .clients-page {padding:0 16px 28px;margin:20px auto;}
+  .clients-heading h2 {font-size:26px;}
+  .client-panel {padding:18px;}
+  .client-search {flex-wrap:wrap;align-items:stretch;gap:14px;}
+  .client-search .form-field {flex:1 1 100%;min-width:0;}
+  .client-search > button {width:100%;}
+  .client-form-grid {grid-template-columns:minmax(0,1fr);}
+  .form-field input,.form-field select,.form-field textarea,.loan-schedule-editor input,.report-controls input {font-size:16px;min-height:48px;}
+  .form-field input[type="file"] {padding:10px 6px;}
+  button,.secondary-button,.report-presets button,.report-group button,.report-hero-actions button {min-height:44px;}
+  .client-pagination {flex-wrap:wrap;justify-content:center;}
+  .client-pagination > span {order:-1;flex-basis:100%;text-align:center;}
+  .client-pagination > button {flex:1;}
+  .loan-actions {display:flex;flex-direction:column;align-items:stretch;}
+  .loan-actions > button,.loan-actions > a {width:100%;text-align:center;justify-content:center;white-space:normal;}
+  .app-dialog {width:100%;max-width:none;height:100dvh;max-height:100dvh;margin:0;border:0;border-radius:0;}
+  .app-dialog .client-panel {padding:20px 16px max(24px,env(safe-area-inset-bottom));}
+  .app-dialog .clients-heading > button {flex-shrink:0;}
+  .app-dialog .loan-actions {padding-bottom:max(12px,env(safe-area-inset-bottom));}
+  .client-table-wrap:has(.responsive-table) {border:0;border-radius:0;background:transparent;overflow:visible;}
+  .client-table.responsive-table,.payments-page .client-table.responsive-table {display:block;width:100%;min-width:0;}
+  .responsive-table caption {display:block;padding:12px 0;}
+  .responsive-table thead {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+  .responsive-table tbody {display:grid;gap:14px;}
+  .responsive-table tbody tr {display:block;border:1px solid #c6d5dc;border-radius:14px;background:white;padding:8px 14px;}
+  .client-table.responsive-table td,.payments-page .client-table.responsive-table td:nth-child(n) {display:grid;grid-template-columns:minmax(90px,35%) minmax(0,1fr);align-items:start;gap:10px;padding:10px 0;border-bottom:1px solid #e2e8ed;white-space:normal;overflow-wrap:anywhere;}
+  .responsive-table td::before {content:attr(data-label);font-size:13px;font-weight:650;color:#52676c;}
+  .client-table.responsive-table td:last-child {border-bottom:0;}
+  .responsive-table td > button,.responsive-table td > a {grid-column:2;}
+  .responsive-table td > small {grid-column:2;}
+  .responsive-table td > br {display:none;}
+  .responsive-table td input {width:100%;min-width:0;max-width:100%;}
+  .client-risk {white-space:normal;line-height:1.5;}
+  .collection-summary {grid-template-columns:minmax(0,1fr);}
+  .collection-address,.collection-loan-id {min-width:0;max-width:none;}
+  .collection-status {max-width:100%;width:auto;}
+  .collection-filters > button {flex:1 1 135px;}
+  .report-table-scroll {max-width:100%;}
+  .report-table-scroll table {min-width:420px;}
+  .report-presets {gap:8px;}
+  .report-group button {font-size:12px;}
+  .report-controls form > div {flex:1 1 110px;}
+  .report-controls input {width:100%;max-width:100%;}
+  .report-kpis {grid-template-columns:repeat(2,minmax(0,1fr));}
+  .report-risk-grid,.report-chart-grid {grid-template-columns:minmax(0,1fr);}
+  .report-metric {min-width:0;}
+  .metric-value {font-size:22px;}
+  .aging-row {grid-template-columns:68px minmax(20px,1fr) 95px;gap:8px;}
+  .receipt-grid {grid-template-columns:minmax(0,1fr);}
+  .receipts-page .form-field select {width:100%;}
+  .admin-role-grid {grid-template-columns:minmax(0,1fr);}
+  .form-panel {padding:24px 16px;}
+  .module-overview {padding:24px 16px;}
+  .module-grid {grid-template-columns:minmax(0,1fr);}
+}
+@media screen and (max-width:800px) {
+  [data-theme="dark"] .responsive-table tbody tr {background:#151a20;border-color:#536672;}
+  [data-theme="dark"] .responsive-table td::before {color:#b1c2cd;}
+  [data-theme="dark"] .client-table-wrap:has(.responsive-table) {background:transparent;}
+}
+@media (prefers-reduced-motion:reduce) {* {scroll-behavior:auto !important;}}
+
+.module-header h1,.payment-form {scroll-margin-top:135px;}
+.app-dialog [tabindex="-1"] {outline:none;}
+
+.dialog-content > .client-panel > .clients-heading {position:sticky;top:0;z-index:3;background:#fff;padding:12px 0;}
+.app-dialog .loan-schedule-editor {scroll-margin-top:100px;}
+@media screen {[data-theme="dark"] .dialog-content > .client-panel > .clients-heading {background:#151a20;}}
+
+@media screen and (max-width:800px) {
+.report-table-scroll table.responsive-table {min-width:0;}
+.report-table-scroll:has(.responsive-table) {overflow:visible;}
+.reports-page .responsive-table td:last-child {text-align:left;}
+}
+
+.table-cell-value {display:contents;}
+@media screen and (max-width:800px) {
+.table-cell-value {display:block;min-width:0;grid-column:2;}
+.table-cell-value > button {display:block;width:100%;margin:4px 0;}
+.table-cell-value > small {display:block;}
+}

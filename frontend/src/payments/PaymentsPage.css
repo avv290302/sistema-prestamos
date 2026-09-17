@@ -1,0 +1,12 @@
+.payments-page .form-field select { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid #bdcbd4; border-radius: 10px; background: white; color: #172b3a; font: inherit; }
+.payments-page select:focus-visible { outline: 3px solid #42a8a0; outline-offset: 3px; }
+.payment-loan-id { display: block; max-width: 240px; margin-top: 6px; color: #5f6e7b; font-size: 11px; overflow-wrap: anywhere; }
+.payment-form { border-top: 1px solid #dce5e8; border-bottom: 1px solid #dce5e8; margin: 24px 0; padding: 12px 0 24px; }
+.payment-review { padding: 22px; margin: 20px 0; background: #f4f7fa; border: 1px solid #dce5e8; border-radius: 12px; overflow-wrap: anywhere; }
+.payments-page .client-notice { overflow-wrap: anywhere; }
+.payments-page .client-notice p { color: #205b4d; }
+.payments-page .client-panel > p { overflow-wrap: anywhere; }
+.payments-page button[aria-pressed="true"] { border-color: #205b4d; background: #e4f2ed; }
+
+.payments-page .client-table {min-width:680px;}
+.payments-page .client-table th, .payments-page .client-table td:nth-child(3), .payments-page .client-table td:nth-child(4) {white-space:nowrap;}

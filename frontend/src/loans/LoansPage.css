@@ -1,0 +1,15 @@
+.loan-totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 20px 0; }
+.loan-totals > div { padding: 18px; background: #edf6f2; border-radius: 12px; }
+.loan-totals span { display: block; font-size: 13px; color: #52676c; margin-bottom: 10px; }
+.loan-totals strong { font-size: 22px; color: #205b4d; }
+.loan-client-options { display: grid; gap: 8px; max-height: 260px; overflow-y: auto; }
+.loan-client-options button { text-align: left; }
+.loan-client-options button[aria-pressed="true"] { background: #e4f2ed; border: 2px solid #205b4d; }
+.loan-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+.loans-page caption { text-align: left; padding: 16px; font-weight: 600; }
+.loans-page .client-panel > p { overflow-wrap: anywhere; }
+.loan-schedule-editor { margin-top: 24px; padding-top: 16px; border-top: 1px solid #d8e5df; }
+.loan-schedule-editor input, .loans-page select { border: 1px solid #c6d5d0; border-radius: 8px; padding: 10px; font: inherit; background: white; color: #173e35; max-width: 100%; }
+.loan-schedule-editor input[type=number] { width: 160px; }
+.loans-page .form-field small { color: #52676c; line-height: 1.5; }
+.loans-page .form-field select { width: 100%; min-height: 44px; }

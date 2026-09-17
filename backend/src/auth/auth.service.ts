@@ -29,7 +29,7 @@ export class AuthService implements OnModuleInit {
         fullName: true,
         email: true,
         role: true,
-        isActive: true,
+        isActive: true, deletedAt: true,
         passwordHash: true,
       },
     });
@@ -39,7 +39,7 @@ export class AuthService implements OnModuleInit {
       dto.password,
     );
 
-    if (!user || !passwordMatches || !user.isActive) {
+    if (!user || !passwordMatches || !user.isActive || user.deletedAt) {
       throw new UnauthorizedException("Correo o contraseña incorrectos.");
     }
 
@@ -85,7 +85,7 @@ export class AuthService implements OnModuleInit {
             fullName: true,
             email: true,
             role: true,
-            isActive: true,
+            isActive: true, deletedAt: true,
           },
         },
       },
@@ -95,7 +95,7 @@ export class AuthService implements OnModuleInit {
       !session ||
       session.revokedAt !== null ||
       session.expiresAt.getTime() <= Date.now() ||
-      !session.user.isActive
+      !session.user.isActive || session.user.deletedAt
     ) {
       throw new UnauthorizedException("Sesión inválida o vencida.");
     }

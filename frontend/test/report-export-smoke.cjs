@@ -1,0 +1,23 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const ts=require('typescript');
+const source=fs.readFileSync('src/reports/report-export.ts','utf8');
+const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+const moduleValue={exports:{}};let payload;let clicked=false;let filename;
+const context={exports:moduleValue.exports,module:moduleValue,Blob,URL:{createObjectURL(blob){payload=blob;return 'blob:test';},revokeObjectURL(){}},document:{createElement(){return {set href(v){},set download(v){filename=v;},click(){clicked=true;},remove(){}};},body:{append(){}}},window:{setTimeout(callback){callback();}}};
+vm.runInNewContext(compiled,context);
+const current={principalCents:1000000,interestCents:400000,collectedCents:100000,loanCount:1,paymentCount:1};
+moduleValue.exports.downloadReportCsv({range:{from:'2026-09-01',to:'2026-09-15'},asOf:'2026-09-15',timeZone:'America/Mexico_City',current,previous:{...current,principalCents:500000},series:[{date:'2026-09-01',...current}],portfolio:{outstandingCents:1300000,overdueCents:0,dueTodayCents:0,upcomingCents:1300000},aging:[],methods:[{method:'CASH',amountCents:100000,count:1}],responsibles:[{fullName:'=2+2',amountCents:100000,count:1}],debtors:[{fullName:'Cliente "Prueba", ejemplo',overdueCents:10000,overdueInstallments:1,daysOverdue:2}]});
+(async()=>{
+ const bytes=new Uint8Array(await payload.arrayBuffer());
+ assert.deepEqual([...bytes.slice(0,3)],[239,187,191]);
+ const csv=await payload.text();
+ assert.ok(csv.includes('"Capital colocado","10000","5000"'));
+ assert.ok(csv.includes('"\'=2+2"'));
+ assert.ok(csv.includes('"Cliente ""Prueba"", ejemplo"'));
+ assert.ok(csv.includes('"Saldo pendiente","13000"'));
+ assert.equal(filename,'reporte-2026-09-01-2026-09-15.csv');
+ assert.equal(clicked,true);
+ console.log('CSV checks passed: UTF-8 BOM, peso amounts, escaping, formula protection, filename and download action.');
+})().catch(error=>{console.error(error.message);process.exitCode=1;});

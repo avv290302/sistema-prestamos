@@ -1,0 +1,12 @@
+.admin-role-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:24px 0;}
+.admin-role-grid article {padding:20px;border:1px solid #d6e5df;border-radius:14px;background:#f2f8f5;}
+.admin-role-grid strong {color:#17594d;font-size:17px;}
+.admin-role-grid p,.administration-page small {color:#52676c;line-height:1.6;}
+.administration-page select {width:100%;min-height:44px;padding:12px;border:1px solid #c6d5d0;border-radius:8px;background:white;color:#173e35;font:inherit;}
+.admin-status {display:inline-block;padding:5px 10px;border-radius:20px;font-weight:600;font-size:12px;}
+.admin-status.active {background:#e5f4eb;color:#205b4d;}
+.admin-status.inactive {background:#edf0f3;color:#52616d;}
+.admin-system-note {padding:16px;background:#f0f5f7;border-radius:10px;}
+.administration-page .client-panel h3:not(:first-child) {margin-top:32px;}
+.administration-page .loan-actions {display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;margin-top:24px;}
+.sidebar-brand > div {min-width:0;overflow-wrap:anywhere;}

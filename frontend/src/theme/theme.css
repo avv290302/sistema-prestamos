@@ -1,0 +1,39 @@
+.theme-picker {display:grid;gap:8px;max-width:320px;margin:16px 0;font-size:13px;font-weight:600;}
+.theme-picker select {font:inherit;padding:10px;border:1px solid #90a5ad;border-radius:8px;background:white;color:#172b3a;min-height:44px;}
+.theme-picker.compact {padding:0 10px;margin-top:24px;}
+.theme-picker.compact select {background:#102c3b;color:#eef6f7;border-color:#53727e;width:100%;}
+select:focus-visible,textarea:focus-visible,a:focus-visible {outline:3px solid #42a8a0;outline-offset:3px;}
+.receipt-actions {margin:18px 0;}
+.receipt-actions .loan-actions {justify-content:flex-start;margin-top:12px;}
+.receipt-actions a.secondary-button {display:inline-flex;align-items:center;text-decoration:none;}
+.receipt-actions p {line-height:1.6;}
+@media screen {
+  :root[data-theme="dark"] {color-scheme:dark;background:#0b0d10;color:#e6edf2;}
+  [data-theme="dark"] :is(.app-main,.form-panel,.status-screen) {background:#0b0d10;color:#e6edf2;}
+  [data-theme="dark"] :is(.app-sidebar,.theme-picker.compact select) {background:#101418;}
+  [data-theme="dark"] :is(.module-header,.workspace-header,.module-card,.client-panel,.client-table-wrap,.report-panel,.report-metric,.collection-card,.login-card,.status-card,.welcome-card) {background:#151a20;border-color:#35414b;color:#e6edf2;box-shadow:none;}
+  [data-theme="dark"] :is(.client-table th,.payment-review,.account-detail,.admin-system-note,.report-group,.chart-readout,.report-table-tag,.report-bar-track,.admin-role-grid article,.client-risk-guide) {background:#202830;color:#d8e4eb;border-color:#35414b;}
+  [data-theme="dark"] :is(.secondary-button,.report-presets button,.report-refresh,.report-group [aria-pressed="true"]) {background:#222c34;border-color:#566773;color:#e1edf2;}
+  [data-theme="dark"] :is(.secondary-button,.module-card,.report-presets button):hover:not(:disabled) {background:#2c3b42;}
+  [data-theme="dark"] :is(input,select,textarea,.form-field input:focus) {background:#0f141a;color:#edf4f8;border-color:#61717f;}
+  [data-theme="dark"] :is(input,textarea)::placeholder {color:#96a6b3;}
+  [data-theme="dark"] :is(input,select,textarea):disabled {background:#272c32;color:#b8c3ca;opacity:1;}
+  [data-theme="dark"] :is(.form-field label,.login-card h2,.status-card h1,.report-loan-status strong,.reports-page,.reports-page td,.report-notes > strong) {color:#e6edf2;}
+  [data-theme="dark"] :is(.clients-heading p,.client-panel > p,.module-overview > p,.module-card > span,.module-placeholder p,.module-header .eyebrow,.form-intro,.access-help,.form-footer,.status-card p,.welcome-card p,.account-detail span,.clients-page small,.loans-page .form-field small,.payment-loan-id,.collection-date,.collection-address,.collection-loan-id,.collection-card span,.collection-card small,.admin-role-grid p,.administration-page small,.report-presets > span,.report-controls label,.report-section-kicker,.report-section-heading > p,.report-section-heading small,.metric-top,.metric-bottom small,.report-delta > span,.report-delta.neutral,.report-panel-heading p,.report-chart-legend,.report-method-total > span,.report-bar-label > span,.report-methods small,.report-portfolio-strip span,.donut-legend > div > span,.report-loan-status span,.report-footnote,.aging-row small,.report-aging-footer,.reports-page th,.report-rank,.report-cell-note,.report-empty-note,.report-notes,.report-loading p) {color:#b1c2cd;}
+  [data-theme="dark"] :is(.client-table th,.client-table td,.reports-page th,.reports-page td,.payment-form,.loan-schedule-editor,.report-loan-status,.report-aging-footer,.report-notes,.report-portfolio-strip > div) {border-color:#35414b;}
+  [data-theme="dark"] :is(.client-notice,.loan-totals > div,.report-portfolio-strip,.role-badge,.collection-status,.admin-status.active,.metric-icon,.placeholder-icon) {background:#173a31;color:#a2e8cb;border-color:#376956;}
+  [data-theme="dark"] :is(.client-notice p,.loan-totals strong,.loan-totals span,.admin-role-grid strong,.module-card small,.module-card svg,.report-data,.report-aging-footer button,.report-delta.up) {color:#9bddc1;}
+  [data-theme="dark"] :is(.error-message,.collection-card.overdue,.collection-status.late) {background:#3d2025;color:#ffb4ae;border-color:#8e454a;}
+  [data-theme="dark"] .collection-card.overdue strong {color:#ffb4ae;}
+  [data-theme="dark"] :is(.report-coral,.report-delta.down) {color:#f5b49b;}
+  [data-theme="dark"] .report-risk-chip {background:#472f23;color:#f5c4a1;}
+  [data-theme="dark"] .client-risk.green {background:#173a31;color:#a2e8cb;}
+  [data-theme="dark"] .client-risk.yellow {background:#443719;color:#f6dc8b;}
+  [data-theme="dark"] .client-risk.red {background:#4c242b;color:#ffb4ae;}
+  [data-theme="dark"] :is(.client-risk.gray,.admin-status.inactive) {background:#303b45;color:#d2dce2;}
+  [data-theme="dark"] :is(.loan-client-options button,.payments-page button)[aria-pressed="true"] {background:#173a31;color:#a2e8cb;border-color:#80c9ae;}
+  [data-theme="dark"] .chart-label,[data-theme="dark"] .donut-caption {fill:#b1c2cd;}
+  [data-theme="dark"] .donut-number {fill:#e6edf2;}
+  [data-theme="dark"] .report-skeleton {background:linear-gradient(100deg,#1a232b,#2b3a45,#1a232b);}
+  [data-theme="dark"] a:not(.secondary-button) {color:#96d5f7;}
+}

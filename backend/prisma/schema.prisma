@@ -15,6 +15,10 @@ enum UserRole {
 }
 
 model User {
+  paymentsCancelled Payment[] @relation("PaymentCancelledBy")
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(3)
+  loanRevisions LoanRevision[]
+  version Int @default(1)
   id           String   @id @default(uuid()) @db.Uuid
   fullName     String   @map("full_name") @db.VarChar(150)
   email        String   @unique @db.VarChar(254)
@@ -24,6 +28,8 @@ model User {
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
 
+  paymentsRecorded Payment[] @relation("PaymentRecordedBy")
+  loansCreated   Loan[] @relation("LoanCreatedBy")
   sessions       Session[]
   clientsCreated Client[] @relation("ClientCreatedBy")
 
@@ -46,6 +52,9 @@ model Session {
 }
 
 model Client {
+  version Int @default(1)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(3)
+  documents ClientDocument[]
   id             String   @id @default(uuid()) @db.Uuid
   fullName       String   @map("full_name") @db.VarChar(150)
   phone          String   @db.VarChar(30)
@@ -58,10 +67,138 @@ model Client {
   updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
   createdById    String   @map("created_by_id") @db.Uuid
 
+  loans Loan[]
     createdBy User @relation("ClientCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
 
   @@index([fullName])
   @@index([phone])
   @@index([createdById])
   @@map("clients")
+}
+model Loan {
+  version Int @default(1)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(3)
+  revisions LoanRevision[]
+  id               String @id @default(uuid()) @db.Uuid
+  requestId        String @unique @map("request_id") @db.Uuid
+  clientId         String @map("client_id") @db.Uuid
+  createdById      String @map("created_by_id") @db.Uuid
+  principalCents   Int @map("principal_cents")
+  interestCents    Int @map("interest_cents")
+  totalCents       Int @map("total_cents")
+  weeklyCents      Int @map("weekly_cents")
+  interestBps      Int @default(4000) @map("interest_bps")
+  installmentCount Int @default(14) @map("installment_count")
+  frequency        String @default("WEEKLY") @db.VarChar(15)
+  intervalDays     Int @default(7) @map("interval_days")
+  firstPaymentDate DateTime @map("first_payment_date") @db.Date
+  // Let PostgreSQL timestamp issuance to avoid application/session timezone shifts.
+  createdAt        DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("created_at") @db.Timestamptz(3)
+  client           Client @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  createdBy        User @relation("LoanCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  payments         Payment[]
+  installments     LoanInstallment[]
+
+  @@index([clientId])
+  @@index([createdById])
+  @@index([createdAt, id])
+  @@map("loans")
+}
+
+model LoanInstallment {
+  id          String @id @default(uuid()) @db.Uuid
+  loanId      String @map("loan_id") @db.Uuid
+  number      Int
+  dueDate     DateTime @map("due_date") @db.Date
+  amountCents Int @map("amount_cents")
+  loan        Loan @relation(fields: [loanId], references: [id], onDelete: Restrict)
+
+  allocations PaymentAllocation[]
+  @@unique([loanId, number])
+  @@index([dueDate])
+  @@map("loan_installments")
+}
+enum PaymentMethod {
+  CASH
+  TRANSFER
+  OTHER
+}
+
+model Payment {
+  cancelledAt DateTime? @map("cancelled_at") @db.Timestamptz(3)
+  cancelledById String? @map("cancelled_by_id") @db.Uuid
+  cancelledByName String? @map("cancelled_by_name") @db.VarChar(150)
+  cancellationReason String? @map("cancellation_reason") @db.VarChar(500)
+  cancelledBy User? @relation("PaymentCancelledBy", fields:[cancelledById], references:[id], onDelete:Restrict)
+  receiptSnapshot Json? @map("receipt_snapshot")
+  id          String @id @default(uuid()) @db.Uuid
+  requestId   String @unique @map("request_id") @db.Uuid
+  loanId      String @map("loan_id") @db.Uuid
+  createdById String @map("created_by_id") @db.Uuid
+  amountCents Int @map("amount_cents")
+  paidOn      DateTime @map("paid_on") @db.Date
+  method      PaymentMethod @default(CASH)
+  notes       String? @db.VarChar(500)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  loan        Loan @relation(fields: [loanId], references: [id], onDelete: Restrict)
+  createdBy   User @relation("PaymentRecordedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  allocations PaymentAllocation[]
+
+  @@index([loanId, paidOn])
+  @@index([createdById])
+  @@index([createdAt, id])
+  @@map("payments")
+}
+
+model PaymentAllocation {
+  id            String @id @default(uuid()) @db.Uuid
+  paymentId     String @map("payment_id") @db.Uuid
+  installmentId String @map("installment_id") @db.Uuid
+  amountCents   Int @map("amount_cents")
+  payment       Payment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  installment   LoanInstallment @relation(fields: [installmentId], references: [id], onDelete: Restrict)
+
+  @@unique([paymentId, installmentId])
+  @@index([installmentId])
+  @@map("payment_allocations")
+}
+
+model AppSettings {
+  businessPhone String @default("") @map("business_phone") @db.VarChar(30)
+  businessAddress String @default("") @map("business_address") @db.VarChar(300)
+  receiptFooter String @default("Gracias por su pago.") @map("receipt_footer") @db.VarChar(300)
+  id Int @id @default(1)
+  businessName String @default("Préstamos") @map("business_name") @db.VarChar(100)
+  interestBps Int @default(4000) @map("interest_bps")
+  installmentCount Int @default(14) @map("installment_count")
+  frequency String @default("WEEKLY") @db.VarChar(15)
+  intervalDays Int @default(7) @map("interval_days")
+  firstPaymentAfterDays Int @default(7) @map("first_payment_after_days")
+  version Int @default(1)
+  @@map("app_settings")
+}
+
+model ClientDocument {
+  id String @id @default(uuid()) @db.Uuid
+  clientId String @map("client_id") @db.Uuid
+  kind String @db.VarChar(10)
+  fileName String @map("file_name") @db.VarChar(200)
+  mimeType String @map("mime_type") @db.VarChar(50)
+  size Int
+  data Bytes
+  client Client @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  @@unique([clientId, kind])
+  @@map("client_documents")
+}
+model LoanRevision {
+  id String @id @default(uuid()) @db.Uuid
+  loanId String @map("loan_id") @db.Uuid
+  actorId String @map("actor_id") @db.Uuid
+  actor User @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  action String @db.VarChar(15)
+  snapshot Json
+  createdAt DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("created_at") @db.Timestamptz(3)
+  loan Loan @relation(fields: [loanId], references: [id], onDelete: Restrict)
+  @@index([loanId])
+  @@map("loan_revisions")
 }

@@ -34,15 +34,13 @@ export class AuthController {
   }
 
   private cookieOptions(): CookieOptions {
-    const isProduction = process.env.NODE_ENV === "production";
-
-    return {
-      httpOnly: true,
-      secure: isProduction,
-      sameSite: isProduction ? "none" : "lax",
-      path: "/",
-    };
-  }
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+  };
+}
 
   private readSessionToken(request: Request): unknown {
     const cookies = request.cookies as

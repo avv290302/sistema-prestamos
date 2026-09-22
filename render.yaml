@@ -6,7 +6,7 @@ services:
     buildCommand: npm ci --include=dev --no-omit=dev && npx prisma generate --config prisma7.config.ts && npm run build
     preDeployCommand: npx prisma migrate deploy --config prisma7.config.ts
     startCommand: npm run start:prod
-    healthCheckPath: /
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production

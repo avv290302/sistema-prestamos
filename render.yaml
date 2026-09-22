@@ -3,7 +3,7 @@ services:
     name: sistema-prestamos-api
     runtime: node
     rootDir: backend
-    buildCommand: npm ci && npx prisma generate --config prisma7.config.ts && npm run build
+   buildCommand: npm ci --include=dev && npx prisma generate --config prisma7.config.ts && npm run build
     preDeployCommand: npx prisma migrate deploy --config prisma7.config.ts
     startCommand: npm run start:prod
     healthCheckPath: /

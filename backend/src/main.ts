@@ -73,9 +73,14 @@ async function bootstrap() {
     }),
 
   );
-
 const port = Number(process.env.PORT) || 10000;
+
+console.log(`PORT recibido de Render: ${process.env.PORT}`);
+console.log(`Intentando escuchar en 0.0.0.0:${port}`);
+
 await app.listen(port, "0.0.0.0");
+
+console.log(`✅ API escuchando correctamente en 0.0.0.0:${port}`);
 
 }
 

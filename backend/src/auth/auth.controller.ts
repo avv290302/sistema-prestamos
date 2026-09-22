@@ -12,7 +12,9 @@ import {
   Res,
   UnauthorizedException,
 } from "@nestjs/common";
+
 import type { CookieOptions, Request, Response } from "express";
+
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dto/login.dto";
 import { Public } from "./auth.decorators";
@@ -32,10 +34,12 @@ export class AuthController {
   }
 
   private cookieOptions(): CookieOptions {
+    const isProduction = process.env.NODE_ENV === "production";
+
     return {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       path: "/",
     };
   }
@@ -79,7 +83,9 @@ export class AuthController {
       throw new UnauthorizedException("Sesión inválida o vencida.");
     }
 
-    return { user: request.authUser };
+    return {
+      user: request.authUser,
+    };
   }
 
   @Public()
@@ -97,6 +103,9 @@ export class AuthController {
 
     await this.authService.logout(token);
 
-    response.clearCookie("prestamos_session", this.cookieOptions());
+    response.clearCookie(
+      "prestamos_session",
+      this.cookieOptions(),
+    );
   }
 }

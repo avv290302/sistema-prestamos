@@ -19,7 +19,8 @@ services:
       - key: FRONTEND_ORIGIN
         sync: false
 
-  - type: static_site
+   - type: web
+    runtime: static
     name: sistema-prestamos-web
     rootDir: frontend
     buildCommand: npm ci && npm run build
